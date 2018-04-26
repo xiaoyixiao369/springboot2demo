@@ -58,14 +58,14 @@ class CorsFilter : WebFilter {
             return Mono.empty()
         } else {
             exchange.response.headers.add("Access-Control-Expose-Headers", "DNT,X-CustomHeader,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Content-Range,Range")
-            return chain.filter(exchange) ?: Mono.empty()
+            return chain.filter(exchange)
         }
     }
 
 }
 
 fun main(args: Array<String>) {
-    runApplication<SpringbootdemoApplication>(*args) {
-        setBannerMode(OFF)
-    }
+    val curTime = System.currentTimeMillis()
+    runApplication<SpringbootdemoApplication>(*args)
+    println("cost time: ${(System.currentTimeMillis() - curTime) / 1000} s")
 }
